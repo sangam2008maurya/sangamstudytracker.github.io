@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Study — Productivity Dashboard</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a2e;--panel2:#18233b;--text:#eef3ff;--muted:#9aa9c5;--line:#263451;--accent:#5eead4;--blue:#7c9cff;--orange:#ffbd69;--red:#ff7b91;--shadow:0 14px 35px #0002}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+body.light{--bg:#f3f6fc;--panel:#fff;--panel2:#edf2fa;--text:#17223b;--muted:#65728b;--line:#dce4f0;--accent:#087f72;--blue:#4268d5;--orange:#a85b00;--red:#c23552;--shadow:0 10px 25px #23365512}
+button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:11px;padding:10px 14px;background:var(--panel2);color:var(--text);font-weight:650}button:hover{filter:brightness(1.08)}button.primary{background:var(--accent);color:#08211f}button.outline{border:1px solid var(--line);background:transparent}.app{max-width:1400px;margin:auto;padding:24px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--blue));color:#071426;font-size:24px;font-weight:900}.brand h1{font-size:22px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.welcome{display:flex;justify-content:space-between;gap:15px;align-items:center;margin:10px 0 20px}.welcome h2{margin:0;font-size:clamp(22px,3vw,30px)}.welcome p{margin:5px 0 0;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:var(--shadow);min-width:0}.stat{grid-column:span 3}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px}.stat-icon{font-size:21px}.stat-value{font-size:29px;font-weight:800;letter-spacing:-.8px;margin:9px 0 3px}.stat-sub{font-size:12px;color:var(--muted)}.timer-card{grid-column:span 7}.stopwatch-card{grid-column:span 7}.side-card{grid-column:span 5}.section-title{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:0 0 14px}.section-title h3{margin:0;font-size:17px}.section-title small{color:var(--muted)}.timer-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}.timer-display{text-align:center;padding:10px 0}.mode-label{color:var(--muted);font-size:13px}.clock{font-size:clamp(40px,6vw,64px);font-weight:800;letter-spacing:-2px;font-variant-numeric:tabular-nums;margin:6px 0}.timer-buttons{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.timer-settings{display:grid;gap:10px}.field{display:grid;gap:5px}.field label{font-size:12px;color:var(--muted)}input,select{width:100%;min-width:0;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 11px;outline:none}input:focus,select:focus{border-color:var(--accent)}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.progress{height:9px;background:var(--panel2);border-radius:99px;overflow:hidden;margin:10px 0}.progress span{height:100%;display:block;background:linear-gradient(90deg,var(--accent),var(--blue));border-radius:99px;width:0;transition:width .25s}.goal-line{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.task-add{display:flex;gap:8px}.task-add input{flex:1}.task-list,.session-list{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}.task{display:flex;align-items:center;gap:9px;padding:10px;border-radius:11px;background:var(--panel2)}.task input{width:17px;height:17px;accent-color:var(--accent)}.task span{flex:1;overflow-wrap:anywhere}.task.done span{text-decoration:line-through;color:var(--muted)}.delete{padding:4px 8px;background:transparent;color:var(--muted)}.chart-card{grid-column:span 7}.subject-card{grid-column:span 5}.bars{height:190px;display:flex;align-items:end;gap:10px;padding:15px 0 0;border-bottom:1px solid var(--line)}.bar-col{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:7px;min-width:0}.bar{width:min(34px,75%);min-height:3px;border-radius:8px 8px 2px 2px;background:linear-gradient(180deg,var(--accent),var(--blue));position:relative}.bar-col label{font-size:11px;color:var(--muted)}.bar-col small{font-size:10px;color:var(--muted)}.subject-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin:14px 0}.subject-name{font-weight:650}.subject-meta{font-size:12px;color:var(--muted)}.subject-track{grid-column:1/-1;height:7px;background:var(--panel2);border-radius:99px;overflow:hidden}.subject-track span{display:block;height:100%;background:var(--blue);border-radius:99px}.history-card{grid-column:span 7}.goal-card{grid-column:span 5}.session{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}.session:last-child{border-bottom:0}.session strong{display:block}.session small{color:var(--muted)}.empty{padding:18px 0;color:var(--muted);text-align:center}.goal-form{display:flex;gap:8px;align-items:end}.goal-form .field{flex:1}.footer{text-align:center;color:var(--muted);font-size:12px;padding:22px 0 8px}.notice{padding:10px 12px;border:1px solid var(--line);background:var(--panel2);border-radius:12px;color:var(--muted);font-size:12px;margin-top:12px}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:11px 16px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:5}
+@media(max-width:850px){.stat{grid-column:span 6}.timer-card,.stopwatch-card,.side-card,.chart-card,.subject-card,.history-card,.goal-card{grid-column:span 12}.timer-layout{grid-template-columns:1fr 1fr}}@media(max-width:520px){.app{padding:14px}.card{padding:15px}.timer-layout{grid-template-columns:1fr}.timer-settings{grid-template-columns:1fr 1fr}.timer-settings .field:first-child{grid-column:span 2}.stat-value{font-size:25px}.welcome{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo">S</div><div><h1>Smart Study</h1><p>Your personal productivity space</p></div></div>
+    <div class="top-actions">
+      <button class="outline" id="exportBtn">⬇ Export CSV</button>
+      <button class="outline" id="backupBtn">Backup JSON</button>
+      <button id="themeBtn" aria-label="Toggle theme">☀️ Light mode</button>
+    </div>
+  </header>
+  <section class="welcome">
+    <div><h2 id="greeting">Welcome back 👋</h2><p id="todayText">Make today count, one focus session at a time.</p></div>
+    <div class="field" style="min-width:190px"><label for="nameInput">Your name (optional)</label><input id="nameInput" placeholder="Enter your name" maxlength="40"></div>
+  </section>
+  <main class="grid">
+    <section class="card stat"><div class="stat-top"><span>Today's study time</span><span class="stat-icon">⏱️</span></div><div class="stat-value" id="todayTotal">0m</div><div class="stat-sub">Saved focus time today</div></section>
+    <section class="card stat"><div class="stat-top"><span>Sessions completed</span><span class="stat-icon">🎯</span></div><div class="stat-value" id="todaySessions">0</div><div class="stat-sub">Completed sessions today</div></section>
+    <section class="card stat"><div class="stat-top"><span>Daily goal</span><span class="stat-icon">🚀</span></div><div class="stat-value" id="goalValue">4h</div><div class="stat-sub" id="goalSub">0% completed</div></section>
+    <section class="card stat"><div class="stat-top"><span>Tasks completed</span><span class="stat-icon">✅</span></div><div class="stat-value" id="taskValue">0/0</div><div class="stat-sub">Today's checklist</div></section>
+
+    <section class="card timer-card">
+      <div class="section-title"><h3>Focus timer</h3><small id="timerStatus">Ready when you are</small></div>
+      <div class="timer-layout">
+        <div class="timer-display">
+          <div class="mode-label" id="modeLabel">FOCUS SESSION</div>
+          <div class="clock" id="clock">25:00</div>
+          <div class="timer-buttons"><button class="primary" id="startBtn">▶ Start</button><button id="pauseBtn">Ⅱ Pause</button><button id="resetBtn">↺ Reset</button></div>
+          <div class="notice" id="timerNote">Saved sessions power the numbers and graphs. Keep this tab open during a session; pause to save partial time.</div>
+        </div>
+        <div class="timer-settings">
+          <div class="field"><label for="subjectSelect">Study subject</label><select id="subjectSelect"><option>General Study</option><option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>Biology</option><option>English</option><option>Computer Science</option><option>Other</option></select></div>
+          <div class="two">
+            <div class="field"><label for="focusMins">Focus (min)</label><input id="focusMins" type="number" min="1" max="180" value="25"></div>
+            <div class="field"><label for="breakMins">Break (min)</label><input id="breakMins" type="number" min="1" max="60" value="5"></div>
+          </div>
+          <button id="breakBtn">☕ Start break</button>
+          <button class="outline" id="soundBtn">🔔 Sound: On</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card stopwatch-card">
+      <div class="section-title"><h3>⏱️ Study Stopwatch</h3><small id="stopwatchStatus">Ready to start</small></div>
+      <div class="timer-display">
+        <div class="mode-label">STOPWATCH · SUBJECT-WISE TRACKING</div>
+        <div class="clock" id="stopwatchClock">00:00:00</div>
+        <div class="timer-buttons">
+          <button class="primary" id="stopwatchStart">▶ Start / Resume</button>
+          <button id="stopwatchSave">Ⅱ Pause &amp; Save</button>
+          <button class="outline" id="stopwatchReset">↺ Reset</button>
+        </div>
+      </div>
+      <div class="notice">Choose a subject in the Focus timer section above. When you press “Pause &amp; Save”, this time is added to today's total, subject breakdown, weekly graph and session history.</div>
+    </section>
+
+    <section class="card side-card">
+      <div class="section-title"><h3>Daily goal</h3><small id="goalPercent">0%</small></div>
+      <div style="font-size:31px;font-weight:800" id="goalTime">0m <span style="font-size:15px;color:var(--muted);font-weight:500">/ 4h</span></div>
+      <div class="progress"><span id="goalBar"></span></div>
+      <div class="goal-line"><span>Keep showing up.</span><span id="goalRemaining">4h left</span></div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+      <div class="section-title"><h3>Set your daily target</h3></div>
+      <div class="goal-form"><div class="field"><label for="goalInput">Target hours</label><input id="goalInput" type="number" min="0.5" max="24" step="0.5" value="4"></div><button class="primary" id="saveGoal">Save goal</button></div>
+      <div class="notice">Productivity is measured as tracked study time, not as proof of attention.</div>
+    </section>
+
+    <section class="card side-card">
+      <div class="section-title"><h3>Today's tasks</h3><small id="taskCount">0 tasks</small></div>
+      <form class="task-add" id="taskForm"><input id="taskInput" maxlength="120" placeholder="e.g. Revise chapter 3" required><button class="primary" type="submit">Add</button></form>
+      <ul class="task-list" id="taskList"></ul>
+    </section>
+
+    <section class="card chart-card">
+      <div class="section-title"><h3>Weekly focus report</h3><small>Last 7 days</small></div>
+      <div class="two" style="margin-bottom:10px">
+        <div class="notice" style="margin:0"><strong id="weekTotal">0m</strong><br>Weekly total</div>
+        <div class="notice" style="margin:0"><strong id="dailyAverage">0m</strong><br>Daily average</div>
+      </div>
+      <div class="bars" id="weeklyChart"></div>
+      <div class="notice">Only sessions saved in this browser are included. Times are shown in minutes.</div>
+    </section>
+    <section class="card subject-card">
+      <div class="section-title"><h3>Subject breakdown</h3><small>Today</small></div>
+      <div id="subjectBreakdown"></div>
+      <div class="notice"><strong>All-time tracked focus:</strong> <span id="allTimeTotal">0m</span><br>
+      <strong>All-time focus sessions:</strong> <span id="allTimeSessions">0</span></div>
+    </section>
+
+    <section class="card history-card">
+      <div class="section-title"><h3>Recent sessions</h3><button class="outline" id="clearSessions">Clear history</button></div>
+      <div id="sessionHistory"></div>
+    </section>
+    <section class="card goal-card">
+      <div class="section-title"><h3>Quick tips</h3><span>💡</span></div>
+      <p style="color:var(--muted);margin-top:0">• Choose one subject before starting a session.</p>
+      <p style="color:var(--muted)">• Use a short break between focus sessions.</p>
+      <p style="color:var(--muted)">• Export a CSV backup regularly.</p>
+      <p style="color:var(--muted)">• For chair-triggered auto-start, a compatible electronic sensor is needed.</p>
+      <button class="outline" id="importBtn">Import JSON backup</button><input id="importFile" type="file" accept=".json,application/json" hidden>
+    </section>
+  </main>
+  <div class="footer">Smart Study • Free and local-first • Your data stays in this browser</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const STORE = "smartStudyDashboard_v2";
+const todayKey = (d=new Date()) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const dateLabel = key => {const [y,m,d]=key.split("-").map(Number);return new Date(y,m-1,d).toLocaleDateString(undefined,{day:"numeric",month:"short"});};
+const fresh = () => ({sessions:[],tasks:[],goalHours:4,theme:"dark",name:"",sound:true});
+let data;
+try { data = {...fresh(), ...JSON.parse(localStorage.getItem(STORE) || "{}")}; } catch { data=fresh(); }
+let running=false, mode="focus", remaining=25*60, deadline=0, interval=null, activeSubject="General Study";
+let stopwatchRunning=false, stopwatchStartedAt=0, stopwatchElapsed=0, stopwatchInterval=null;
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(data));}catch{toast("Browser storage full. Export a backup.");}}
+function toast(msg){const t=$("toast");t.textContent=msg;t.style.display="block";clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display="none",2600);}
+function secsToday(){return data.sessions.filter(s=>s.day===todayKey()).reduce((n,s)=>n+s.seconds,0);}
+function mins(n){n=Math.max(0,Math.floor(n/60));return n>=60?`${Math.floor(n/60)}h ${n%60}m`:`${n}m`;}
+function clockFmt(n){n=Math.max(0,Math.ceil(n));return `${String(Math.floor(n/60)).padStart(2,"0")}:${String(n%60).padStart(2,"0")}`;}
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function render(){
+ const total=secsToday(), goal=Math.round(data.goalHours*3600), pct=goal?Math.min(100,Math.round(total/goal*100)):0;
+ $("todayTotal").textContent=mins(total);$("todaySessions").textContent=data.sessions.filter(s=>s.day===todayKey()&&s.kind==="focus").length;
+ $("goalValue").textContent=`${pct}%`; $("goalSub").textContent=`${pct}% completed`;
+ $("taskValue").textContent=`${data.tasks.filter(t=>t.day===todayKey()&&t.done).length}/${data.tasks.filter(t=>t.day===todayKey()).length}`;
+ $("goalPercent").textContent=pct+"%"; $("goalTime").innerHTML=`${mins(total)} <span style="font-size:15px;color:var(--muted);font-weight:500">/ ${data.goalHours}h</span>`;
+ $("goalBar").style.width=pct+"%"; $("goalRemaining").textContent=total>=goal?"Goal reached!":mins(goal-total)+" left";
+ $("goalInput").value=data.goalHours;$("nameInput").value=data.name||"";
+ $("greeting").textContent=data.name?`Welcome back, ${data.name} 👋`:"Welcome back 👋";
+ $("todayText").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+ $("taskCount").textContent=data.tasks.filter(t=>t.day===todayKey()).length+" tasks";
+ const tasks=data.tasks.filter(t=>t.day===todayKey());
+ $("taskList").innerHTML=tasks.map(t=>`<li class="task ${t.done?"done":""}"><input type="checkbox" data-task="${t.id}" ${t.done?"checked":""} aria-label="Complete task"><span>${safe(t.text)}</span><button class="delete" data-delete="${t.id}" aria-label="Delete task">✕</button></li>`).join("")||'<li class="empty">No tasks yet. Add one above.</li>';
+ const days=Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()-(6-i));return todayKey(d);});
+ const values=days.map(day=>data.sessions.filter(s=>s.day===day&&s.kind==="focus").reduce((n,s)=>n+s.seconds,0));
+ const weekSeconds=values.reduce((a,b)=>a+b,0);
+ $("weekTotal").textContent=mins(weekSeconds);
+ $("dailyAverage").textContent=mins(Math.round(weekSeconds/7));
+ $("allTimeTotal").textContent=mins(data.sessions.filter(s=>s.kind==="focus").reduce((n,s)=>n+s.seconds,0));
+ $("allTimeSessions").textContent=data.sessions.filter(s=>s.kind==="focus").length;
+ const max=Math.max(3600,...values);
+ $("weeklyChart").innerHTML=days.map((day,i)=>`<div class="bar-col"><small>${Math.round(values[i]/60)}m</small><div class="bar" style="height:${Math.max(3,values[i]/max*135)}px" title="${Math.round(values[i]/60)} minutes"></div><label>${new Date(day+"T12:00:00").toLocaleDateString(undefined,{weekday:"short"})}</label></div>`).join("");
+ const subjects={};data.sessions.filter(s=>s.day===todayKey()&&s.kind==="focus").forEach(s=>subjects[s.subject]=(subjects[s.subject]||0)+s.seconds);
+ const entries=Object.entries(subjects).sort((a,b)=>b[1]-a[1]);const subjectMax=Math.max(1,...entries.map(x=>x[1]));
+ $("subjectBreakdown").innerHTML=entries.map(([name,sec])=>`<div class="subject-row"><div><div class="subject-name">${safe(name)}</div><div class="subject-meta">${mins(sec)}</div></div><strong>${Math.round(sec/Math.max(1,total)*100)}%</strong><div class="subject-track"><span style="width:${sec/subjectMax*100}%"></span></div></div>`).join("")||'<div class="empty">Your subject report will appear after a focus session.</div>';
+ const recent=data.sessions.slice().reverse().slice(0,12);
+ $("sessionHistory").innerHTML=recent.map(s=>`<div class="session"><div><strong>${safe(s.subject)} · ${s.kind==="break"?"Break":"Focus"}</strong><small>${dateLabel(s.day)}${s.time?" · "+safe(s.time):""}</small></div><strong>${mins(s.seconds)}</strong></div>`).join("")||'<div class="empty">No saved sessions yet. Start your first focus session.</div>';
+ $("clock").textContent=clockFmt(remaining);$("modeLabel").textContent=mode==="focus"?"FOCUS SESSION":"BREAK TIME";
+ $("timerStatus").textContent=running?"Timer is running": "Ready when you are";
+ $("startBtn").textContent=running?"▶ Running":"▶ Start";
+ $("themeBtn").textContent=data.theme==="dark"?"☀️ Light mode":"🌙 Dark mode";
+ $("soundBtn").textContent=data.sound?"🔔 Sound: On":"🔕 Sound: Off";
+ document.body.classList.toggle("light",data.theme==="light");
+}
+function stopInterval(){if(interval){clearInterval(interval);interval=null;}}
+function tick(){
+ remaining=Math.max(0,(deadline-Date.now())/1000);
+ $("clock").textContent=clockFmt(remaining);
+ if(remaining<=0){completeTimer();}
+}
+function start(){
+ if(running)return;
+ if(remaining<=0)remaining=(mode==="focus"?Number($("focusMins").value):Number($("breakMins").value))*60;
+ if(!Number.isFinite(remaining)||remaining<=0){toast("Please enter a valid timer length.");return;}
+ activeSubject=$("subjectSelect").value;running=true;deadline=Date.now()+remaining*1000;
+ interval=setInterval(tick,250);render();
+}
+function pause(){
+ if(!running)return;
+ remaining=Math.max(0,(deadline-Date.now())/1000);running=false;stopInterval();
+ const total=Math.max(0,Math.round((mode==="focus"?Number($("focusMins").value):Number($("breakMins").value))*60-remaining));
+ if(total>=5)saveSession(total,mode,activeSubject);
+ render();toast("Timer paused.");
+}
+function saveSession(seconds,kind,subject){
+ data.sessions.push({id:Date.now()+Math.random(),day:todayKey(),time:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}),seconds,kind,subject:kind==="focus"?subject:"Break"});
+ persist();
+}
+function completeTimer(){
+ const kind=mode;running=false;stopInterval();saveSession(Math.max(1,Math.round(mode==="focus"?Number($("focusMins").value)*60:Number($("breakMins").value)*60)),kind,activeSubject);
+ if(data.sound){try{const C=window.AudioContext||window.webkitAudioContext;if(C){const c=new C(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=740;g.gain.value=.08;o.start();o.stop(c.currentTime+.35);}}catch{}}
+ mode=mode==="focus"?"break":"focus";remaining=(mode==="focus"?Number($("focusMins").value):Number($("breakMins").value))*60;render();toast(kind==="focus"?"Focus session complete! Take a break.":"Break finished! Ready to focus?");
+}
+function reset(){running=false;stopInterval();remaining=(mode==="focus"?Number($("focusMins").value):Number($("breakMins").value))*60;render();}
+$("startBtn").addEventListener("click",start);
+$("pauseBtn").addEventListener("click",pause);
+$("resetBtn").addEventListener("click",reset);
+$("breakBtn").addEventListener("click",()=>{if(running)pause();mode="break";remaining=Number($("breakMins").value)*60;render();start();});
+$("focusMins").addEventListener("change",()=>{if(!running&&mode==="focus"){remaining=Math.max(1,Number($("focusMins").value))*60;render();}});
+$("breakMins").addEventListener("change",()=>{if(!running&&mode==="break"){remaining=Math.max(1,Number($("breakMins").value))*60;render();}});
+function stopwatchSeconds(){return stopwatchElapsed+(stopwatchRunning?(Date.now()-stopwatchStartedAt)/1000:0);}
+function stopwatchFmt(seconds){seconds=Math.max(0,Math.floor(seconds));const h=Math.floor(seconds/3600),m=Math.floor((seconds%3600)/60),sec=seconds%60;return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;}
+function renderStopwatch(){$("stopwatchClock").textContent=stopwatchFmt(stopwatchSeconds());$("stopwatchStatus").textContent=stopwatchRunning?"Stopwatch is running":(stopwatchElapsed>0?"Paused — ready to save or resume":"Ready to start");$("stopwatchStart").textContent=stopwatchRunning?"▶ Running":"▶ Start / Resume";}
+function stopStopwatchInterval(){if(stopwatchInterval){clearInterval(stopwatchInterval);stopwatchInterval=null;}}
+$("stopwatchStart").addEventListener("click",()=>{if(stopwatchRunning)return;activeSubject=$("subjectSelect").value;stopwatchRunning=true;stopwatchStartedAt=Date.now();stopwatchInterval=setInterval(renderStopwatch,250);renderStopwatch();});
+$("stopwatchSave").addEventListener("click",()=>{if(stopwatchRunning){stopwatchElapsed+=Date.now()-stopwatchStartedAt;stopwatchRunning=false;stopStopwatchInterval();}const seconds=Math.floor(stopwatchElapsed/1000);if(seconds<1){renderStopwatch();toast("Start the stopwatch before saving time.");return;}saveSession(seconds,"focus",activeSubject);stopwatchElapsed=0;renderStopwatch();render();toast(`Saved ${mins(seconds)} for ${activeSubject}.`);});
+$("stopwatchReset").addEventListener("click",()=>{stopwatchRunning=false;stopStopwatchInterval();stopwatchElapsed=0;stopwatchStartedAt=0;renderStopwatch();toast("Stopwatch reset. Unsaved time was discarded.");});
+$("subjectSelect").addEventListener("change",()=>{if(!stopwatchRunning)activeSubject=$("subjectSelect").value;});
+$("saveGoal").addEventListener("click",()=>{const n=Number($("goalInput").value);if(n<.5||n>24||!Number.isFinite(n)){toast("Goal must be between 0.5 and 24 hours.");return;}data.goalHours=n;persist();render();toast("Daily goal saved.");});
+$("nameInput").addEventListener("change",e=>{data.name=e.target.value.trim();persist();render();});
+$("themeBtn").addEventListener("click",()=>{data.theme=data.theme==="dark"?"light":"dark";persist();render();});
+$("soundBtn").addEventListener("click",()=>{data.sound=!data.sound;persist();render();});
+$("taskForm").addEventListener("submit",e=>{e.preventDefault();const text=$("taskInput").value.trim();if(!text)return;data.tasks.push({id:Date.now()+Math.random(),day:todayKey(),text,done:false});$("taskInput").value="";persist();render();});
+$("taskList").addEventListener("change",e=>{if(e.target.matches("[data-task]")){const t=data.tasks.find(t=>String(t.id)===e.target.dataset.task);if(t)t.done=e.target.checked;persist();render();}});
+$("taskList").addEventListener("click",e=>{const b=e.target.closest("[data-delete]");if(b){data.tasks=data.tasks.filter(t=>String(t.id)!==b.dataset.delete);persist();render();}});
+$("clearSessions").addEventListener("click",()=>{if(confirm("Delete all study session history? This cannot be undone unless you have a backup.")){data.sessions=[];persist();render();toast("Session history cleared.");}});
+function download(content,type,name){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);}
+$("exportBtn").addEventListener("click",()=>{const rows=[["Date","Time","Type","Subject","Seconds","Minutes"],...data.sessions.map(s=>[s.day,s.time||"",s.kind,s.subject,s.seconds,(s.seconds/60).toFixed(1)])];const csv=rows.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");download("\ufeff"+csv,"text/csv;charset=utf-8","smart-study-sessions.csv");});
+$("backupBtn").addEventListener("click",()=>download(JSON.stringify(data,null,2),"application/json","smart-study-backup.json"));
+$("importBtn").addEventListener("click",()=>$("importFile").click());
+$("importFile").addEventListener("change",async e=>{const file=e.target.files[0];if(!file)return;try{const obj=JSON.parse(await file.text());if(!Array.isArray(obj.sessions)||!Array.isArray(obj.tasks))throw Error();if(confirm("Replace current data with this backup?")){data={...fresh(),...obj};persist();render();toast("Backup imported.");}}catch{toast("Invalid Smart Study JSON backup.");}e.target.value="";});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&running)tick();});
+remaining=25*60;render();renderStopwatch();
+})();
+</script>
+</body>
+</html>
